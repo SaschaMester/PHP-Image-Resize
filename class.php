@@ -15,8 +15,8 @@ class PHPImageResize {
 	}
 	
 	// Setzten von Variabeln
-	public function __set($name, $vaule) {
-		$this->$name = $vaule;
+	public function __set($name, $value) {
+		$this->$name = $value;
 	}
 
 	// Auslesen von Variabeln
@@ -32,7 +32,7 @@ class PHPImageResize {
 	}
 	
 	function importImageInput($FILE, $tmpFilePath = false) { // JPG und PNG erlaubt
-		if ($tmpFilePath == false) {
+		if (!$tmpFilePath) {
 			$tmpFilePath = 'tmp/' . microtime();
 		}
 		
@@ -45,7 +45,7 @@ class PHPImageResize {
 			$this->image = imagecreatefromjpeg($tmpFilePath);
 			
 			$this->type = 1;
-		}elseif ($FILE['type'] == 'image/png'){
+		} elseif ($FILE['type'] == 'image/png'){
 			// Wandle PNG in Image Souce
 			$png = imagecreatefrompng($FILE['tmp_name']);
 			
@@ -94,7 +94,7 @@ class PHPImageResize {
 		
 		// Pruefe ob Faktor ueber 1 ist (vergroesergung des Bilders). Pruefe ob gewuenscht, wenn nicht, gebe Bild in Orginalgroesse zurueck)
 		if ($factor > 1 && !$biggerThanOriginal) {
-			if ($savePath != false) {
+			if ($savePath) {
 				// Speichere Bild unter angegebenen Pfad ab
 				imagejpeg($this->image, $savePath, $quality);
 				return;
@@ -113,7 +113,7 @@ class PHPImageResize {
 		$resizedImage = imagecreatetruecolor($newWidth, $newHeight);
 		imagecopyresampled($resizedImage, $this->image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
-		if ($savePath != false) {
+		if ($savePath) {
 			// Speichere Bild unter angegebenen Pfad ab
 			imagejpeg($resizedImage, $savePath, $quality);
 			unset($resizedImage);
@@ -147,11 +147,11 @@ class PHPImageResize {
 		unlink($this->imageSouce . '-2');
 		unset($image);
 
-		if ($savePath != false) {
+		if ($savePath) {
 			// Speichere Bild unter angegebenen Pfad ab
 			imagejpeg($resizedImage, $savePath, $quality);
 			unset($resizedImage);
-		}else {
+		} else {
 			// Gebe verkleinertes Bild zurueck
 			return $resizedImage;
 		}

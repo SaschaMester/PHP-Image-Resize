@@ -8,7 +8,7 @@ The folder /tmp have to be in the path, where the class.php is. All other files 
 
 ### License
 The whole project except the images in examples/images/ is released under MIT or GPL Version 3.
-The images in examples/images/ are copyright by Jan Karres (jankarres.de). You may only use there for the attached example. If you would like publish the example, you have to use your own images!
+The images in examples/images/ are copyright by Jan Karres (jankarres.de). You may only use them for the attached example. If you would like to publish the example, you have to use your own images!
 
 ### Requirements
  * PHP 5.2 or higher
